@@ -4,6 +4,7 @@
 
 #import "FlutterWebView.h"
 #import "FLTWKNavigationDelegate.h"
+#import "FLTWKUIDelegate.h"
 #import "JavaScriptChannelHandler.h"
 
 @implementation FLTWebViewFactory {
@@ -64,6 +65,7 @@
   // The set of registered JavaScript channel names.
   NSMutableSet* _javaScriptChannelNames;
   FLTWKNavigationDelegate* _navigationDelegate;
+  FLTWKUIDelegate* _uiDelegate;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -95,6 +97,8 @@
     _navigationDelegate = [[FLTWKNavigationDelegate alloc] initWithChannel:_channel];
     _webView.UIDelegate = self;
     _webView.navigationDelegate = _navigationDelegate;
+    _uiDelegate = [[FLTWKUIDelegate alloc] initWithChannel:_channel];
+    _webView.UIDelegate = _uiDelegate;
     __weak __typeof__(self) weakSelf = self;
     [_channel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
       [weakSelf onMethodCall:call result:result];
