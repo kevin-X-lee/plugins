@@ -19,6 +19,9 @@
 #pragma mark - WKNavigationDelegate conformance
 
 - (void)webView:(WKWebView*)webView didStartProvisionalNavigation:(WKNavigation*)navigation {
+  //add
+   [webView.configuration.preferences setValue:@TRUE forKey:@"allowFileAccessFromFileURLs"];
+   
   [_methodChannel invokeMethod:@"onPageStarted" arguments:@{@"url" : webView.URL.absoluteString}];
 }
 
