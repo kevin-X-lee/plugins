@@ -67,5 +67,11 @@
 
 - (void)webView:(WKWebView*)webView didFinishNavigation:(WKNavigation*)navigation {
   [_methodChannel invokeMethod:@"onPageFinished" arguments:@{@"url" : webView.URL.absoluteString}];
+//        [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillShowNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification * _Nonnull note) {
+//            CGPoint point = webView.scrollView.contentOffset;
+//        }];
+        [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification * _Nonnull note) {
+            webView.scrollView.contentOffset = CGPointMake(0, 0);
+        }];
 }
 @end
