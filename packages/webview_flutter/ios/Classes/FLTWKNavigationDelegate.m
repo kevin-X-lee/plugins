@@ -72,12 +72,12 @@
 - (void)webView:(WKWebView *)webView didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler{
 
     //NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengeUseCredential;
-    NSURLCredential *credential = nil;
-    NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengeUseCredential;
-    if (completionHandler) {
-        completionHandler(disposition, credential);
-    }
-//    NSURLCredential * credential = [[NSURLCredential alloc] initWithTrust:[challenge protectionSpace].serverTrust];
-//    completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
+//    NSURLCredential *credential = nil;
+//    NSURLSessionAuthChallengeDisposition disposition = NSURLSessionAuthChallengeUseCredential;
+//    if (completionHandler) {
+//        completionHandler(disposition, credential);
+//    }
+    NSURLCredential * credential = [[NSURLCredential alloc] initWithTrust:[challenge protectionSpace].serverTrust];
+    completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
 }
 @end
